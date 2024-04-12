@@ -66,6 +66,7 @@ def weekday():
 
 @app.route("/history", methods=["GET", "DELETE"])
 def history():
+    """ Returns history from user's actions """
     if request.method == "GET":
         args = request.args.to_dict()
         number = args.get("number")
@@ -92,6 +93,7 @@ def history():
 
 @app.route("/current_age", methods=["GET"])
 def get_age():
+    """ Computes age from user's birthdate """
     args = request.args.to_dict()
     birthdate = args.get("date")
 

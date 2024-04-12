@@ -21,6 +21,7 @@ def get_days_between(first: datetime, last: datetime) -> int:
 
 
 def get_day_of_week_on(date_val: datetime) -> str:
+    """ Returns day of the week from date """
     if isinstance(date_val, datetime):
         return date_val.strftime('%A')
     else:
@@ -28,7 +29,7 @@ def get_day_of_week_on(date_val: datetime) -> str:
 
 
 def get_current_age(birthdate: date) -> int:
-
+    """ Computes age from birthdate """
     if isinstance(birthdate, date):
         today = datetime.today()
         # print(today)
