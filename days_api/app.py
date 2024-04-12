@@ -4,9 +4,9 @@
 
 from datetime import datetime, date
 
-from flask import Flask, Response, request, jsonify
+from flask import Flask, request, jsonify
 
-from date_functions import (convert_to_datetime, convert_to_datetime_hyphen, get_day_of_week_on,
+from date_functions import (convert_to_datetime, get_day_of_week_on,
                             get_days_between, get_current_age)
 
 app_history = []
@@ -56,10 +56,10 @@ def weekday():
         return {"error": "Missing required data."}, 400
 
     try:
-        date = convert_to_datetime(response['date'])
-        weekday = get_day_of_week_on(date)
+        the_date = convert_to_datetime(response['date'])
+        day = get_day_of_week_on(the_date)
         add_to_history(request)
-        return {"weekday": weekday}
+        return {"weekday": day}
     except:
         return {'error': 'Unable to convert value to datetime.'}, 400
 
@@ -82,11 +82,10 @@ def history():
             return {"error": "Number must be an integer between 1 and 20."}, 400
 
         add_to_history(request)
-        history = app_history[::-1][:number]
+        history_of_app = app_history[::-1][:number]
+        return jsonify(history_of_app)
 
-        return jsonify(history)
-
-    elif request.method == "DELETE":
+    if request.method == "DELETE":
         app_history.clear()
         return {'status': "History cleared"}
 
@@ -110,36 +109,3 @@ def get_age():
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
-
-
-"""
-
-POST - weekday
-http://localhost:8080/weekday
-
-{
-    "date": "12.04.2024"
-}
-
-
-
-GET - history 
-http://localhost:8080/history
-
-http://localhost:8080/history?number=2
-
-
-
-DELETE - history
-http://localhost:8080/history
-
-
-
-GET - age
-http://localhost:8080/current_age?date=01.07.2002
-
-{
-    "date" : "01.07.2002"
-}
-
-"""
