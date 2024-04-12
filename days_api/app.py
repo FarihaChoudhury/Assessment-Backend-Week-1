@@ -6,7 +6,7 @@ from datetime import datetime, date
 
 from flask import Flask, Response, request, jsonify
 
-from date_functions import (convert_to_datetime, get_day_of_week_on,
+from date_functions import (convert_to_datetime, convert_to_datetime_hyphen, get_day_of_week_on,
                             get_days_between, get_current_age)
 
 app_history = []
@@ -41,7 +41,6 @@ def between():
         first = convert_to_datetime(response["first"])
         last = convert_to_datetime(response["last"])
         between = get_days_between(first, last)
-        print(between)
         add_to_history(request)
         return {"days": between}, 200
     except:
@@ -59,9 +58,7 @@ def weekday():
     try:
         date = convert_to_datetime(response['date'])
         weekday = get_day_of_week_on(date)
-        print(weekday)
         add_to_history(request)
-        print(app_history)
         return {"weekday": weekday}
     except:
         return {'error': 'Unable to convert value to datetime.'}, 400
@@ -80,10 +77,8 @@ def history():
             return {"error": "Number must be an integer between 1 and 20."}, 400
 
         number = int(number)
-        if not 1 <= int(number) <= 20:
+        if not 1 <= number <= 20:
             return {"error": "Number must be an integer between 1 and 20."}, 400
-        else:
-            number = int(number)
 
         add_to_history(request)
         history = app_history[::-1][:number]
@@ -97,21 +92,18 @@ def history():
 
 @app.route("/current_age", methods=["GET"])
 def get_age():
-    # if request.method == "GET":
     args = request.args.to_dict()
     birthdate = args.get("date")
-    if not birthdate:
-        return {"error": "Date parameter is required."}, 400
-    if not isinstance(birthdate, date):
-        return {"error": "Value for data parameter is invalid."}, 400
 
-    # try:
-    dob = convert_to_datetime(date)
-    age = get_current_age(dob)
-    add_to_history(request)
-    return {"current_age": age}
-    # except:
-    #     return {"error": "Date parameter is required!!."}, 400
+    if not birthdate and not isinstance(birthdate, date):
+        return {"error": "Date parameter is required."}, 400
+
+    try:
+        age = get_current_age(birthdate)
+        add_to_history(request)
+        return {"current_age": age}
+    except:
+        return {"error": "Value for data parameter is invalid."}, 400
 
 
 if __name__ == "__main__":
