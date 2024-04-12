@@ -33,7 +33,7 @@ def get_current_age(birthdate: date) -> int:
         today = datetime.today()
         print(today)
         age = today.year - birthdate.year - \
-            (((today.month, today.day) < (birthdate.month, birthdate.day)))
+            ((today.month, today.day) < (birthdate.month, birthdate.day))
         print(f'Your age is {age}')
         return age
     else:

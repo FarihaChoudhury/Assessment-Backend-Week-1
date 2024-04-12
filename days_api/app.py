@@ -30,30 +30,41 @@ def index():
 
 
 @app.route("/between", methods=["POST"])
-def get_between():
+def between():
     """ Computes how many days between two given dates """
     response = request.json
+    for key in ["first", "last"]:
+        if key not in response:
+            return {"error": "Missing required data."}, 400
+
     try:
         first = convert_to_datetime(response["first"])
         last = convert_to_datetime(response["last"])
         between = get_days_between(first, last)
         print(between)
         add_to_history(request)
-        return {"days": between}
-    except d:
-        return {"error": "Missing required data."}, 400
+        return {"days": between}, 200
+    except:
+        return {'error': 'Unable to convert value to datetime.'}, 400
 
 
 @app.route("/weekday", methods=["POST"])
-def get_weekday():
+def weekday():
     """ Returns the day of the week of the date """
     response = request.json
-    date = convert_to_datetime(response['date'])
-    weekday = get_day_of_week_on(date)
-    print(weekday)
-    add_to_history(request)
-    print(app_history)
-    return {"weekday": weekday}
+
+    if 'date' not in response:
+        return {"error": "Missing required data."}, 400
+
+    try:
+        date = convert_to_datetime(response['date'])
+        weekday = get_day_of_week_on(date)
+        print(weekday)
+        add_to_history(request)
+        print(app_history)
+        return {"weekday": weekday}
+    except:
+        return {'error': 'Unable to convert value to datetime.'}, 400
 
 
 @app.route("/history", methods=["GET", "DELETE"])
@@ -62,15 +73,22 @@ def history():
         args = request.args.to_dict()
         number = args.get("number")
 
-        if not number or not int(number) or not 1 <= int(number) <= 20:
+        if not number:
             number = 5
+
+        elif not number.isdigit():
+            return {"error": "Number must be an integer between 1 and 20."}, 400
+
+        number = int(number)
+        if not 1 <= int(number) <= 20:
+            return {"error": "Number must be an integer between 1 and 20."}, 400
         else:
             number = int(number)
 
         add_to_history(request)
-        history = app_history[-number:]
+        history = app_history[::-1][:number]
 
-        return history
+        return jsonify(history)
 
     elif request.method == "DELETE":
         app_history.clear()
@@ -79,12 +97,21 @@ def history():
 
 @app.route("/current_age", methods=["GET"])
 def get_age():
+    # if request.method == "GET":
     args = request.args.to_dict()
-    date = args.get("date")
+    birthdate = args.get("date")
+    if not birthdate:
+        return {"error": "Date parameter is required."}, 400
+    if not isinstance(birthdate, date):
+        return {"error": "Value for data parameter is invalid."}, 400
+
+    # try:
     dob = convert_to_datetime(date)
     age = get_current_age(dob)
     add_to_history(request)
     return {"current_age": age}
+    # except:
+    #     return {"error": "Date parameter is required!!."}, 400
 
 
 if __name__ == "__main__":
