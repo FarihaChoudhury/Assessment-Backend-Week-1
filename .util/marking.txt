@@ -1,23 +1,26 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.11.9, pytest-8.1.1, pluggy-1.4.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
-collected 49 items
+collected 112 items
 
-days_api/test_api.py .FFFFFFFFF                                          [ 20%]
+days_api/test_api.py ................................................... [ 45%]
+.................FFFFF                                                   [ 65%]
 days_api/test_date_functions.py .......................................  [100%]
 
-========================= 9 failed, 40 passed in 0.17s =========================
+======================== 5 failed, 107 passed in 0.27s =========================
 ************* Module app
-days_api/app.py:43:11: E0602: Undefined variable 'd' (undefined-variable)
-days_api/app.py:51:4: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
-days_api/app.py:60:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/app.py:71:8: W0621: Redefining name 'history' from outer scope (line 60) (redefined-outer-name)
-days_api/app.py:61:4: R1705: Unnecessary "elif" after "return", remove the leading "el" from "elif" (no-else-return)
-days_api/app.py:60:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-days_api/app.py:81:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/app.py:83:4: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
-days_api/app.py:94:0: W0105: String statement has no effect (pointless-string-statement)
-days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
+days_api/app.py:43:8: W0621: Redefining name 'between' from outer scope (line 33) (redefined-outer-name)
+days_api/app.py:47:4: W0702: No exception type(s) specified (bare-except)
+days_api/app.py:60:8: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
+days_api/app.py:61:8: W0621: Redefining name 'weekday' from outer scope (line 52) (redefined-outer-name)
+days_api/app.py:66:4: W0702: No exception type(s) specified (bare-except)
+days_api/app.py:71:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/app.py:89:8: W0621: Redefining name 'history' from outer scope (line 71) (redefined-outer-name)
+days_api/app.py:72:4: R1705: Unnecessary "elif" after "return", remove the leading "el" from "elif" (no-else-return)
+days_api/app.py:83:8: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+days_api/app.py:71:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+days_api/app.py:99:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/app.py:121:0: W0105: String statement has no effect (pointless-string-statement)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
 ************* Module date_functions
 days_api/date_functions.py:12:8: W0707: Consider explicitly re-raising using 'except Exception as exc' and 'raise ValueError('Unable to convert value to datetime.') from exc' (raise-missing-from)
@@ -28,5 +31,5 @@ days_api/date_functions.py:30:0: C0116: Missing function or method docstring (mi
 days_api/date_functions.py:32:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.16/10 (previous run: 7.16/10, +0.00)
+Your code has been rated at 7.91/10 (previous run: 7.91/10, +0.00)
 
