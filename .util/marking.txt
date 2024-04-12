@@ -1,23 +1,19 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.11.9, pytest-8.1.1, pluggy-1.4.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
-collected 0 items / 1 error
+collected 112 items
 
-!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-=============================== 1 error in 0.15s ===============================
+days_api/test_api.py ................................................... [ 45%]
+......................                                                   [ 65%]
+days_api/test_date_functions.py .......................................  [100%]
+
+============================= 112 passed in 0.28s ==============================
 ************* Module app
 days_api/app.py:43:8: W0621: Redefining name 'between' from outer scope (line 33) (redefined-outer-name)
 days_api/app.py:46:4: W0702: No exception type(s) specified (bare-except)
-days_api/app.py:59:8: W0621: Redefining name 'date' from outer scope (line 5) (redefined-outer-name)
-days_api/app.py:60:8: W0621: Redefining name 'weekday' from outer scope (line 51) (redefined-outer-name)
 days_api/app.py:63:4: W0702: No exception type(s) specified (bare-except)
-days_api/app.py:85:8: W0621: Redefining name 'history' from outer scope (line 68) (redefined-outer-name)
-days_api/app.py:70:4: R1705: Unnecessary "elif" after "return", remove the leading "el" from "elif" (no-else-return)
 days_api/app.py:68:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-days_api/app.py:107:4: W0702: No exception type(s) specified (bare-except)
-days_api/app.py:115:0: W0105: String statement has no effect (pointless-string-statement)
-days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
-days_api/app.py:9:0: W0611: Unused convert_to_datetime_hyphen imported from date_functions (unused-import)
+days_api/app.py:106:4: W0702: No exception type(s) specified (bare-except)
 ************* Module date_functions
 days_api/date_functions.py:12:8: W0707: Consider explicitly re-raising using 'except Exception as exc' and 'raise ValueError('Unable to convert value to datetime.') from exc' (raise-missing-from)
 days_api/date_functions.py:17:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
@@ -25,5 +21,5 @@ days_api/date_functions.py:25:4: R1705: Unnecessary "else" after "return", remov
 days_api/date_functions.py:33:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
 
 ------------------------------------------------------------------
-Your code has been rated at 8.14/10 (previous run: 8.14/10, +0.00)
+Your code has been rated at 8.94/10 (previous run: 8.94/10, +0.00)
 
